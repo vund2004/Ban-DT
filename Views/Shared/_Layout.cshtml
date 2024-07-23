@@ -1,0 +1,290 @@
+﻿@using NET104_ASM.Models;
+@using Microsoft.AspNetCore.Mvc;
+@using Microsoft.AspNetCore.Http;
+@using Microsoft.AspNetCore.Http.Features;
+@using Microsoft.AspNetCore.Session;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Assignment</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <script src="~/js/bootstrap.bundle.js"></script>
+    <link rel="stylesheet" href="~/css/style.css">
+    <link rel="stylesheet" href="../../LayoutAdmin/css/style.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="~/js/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-route/1.8.3/angular-route.min.js"></script>
+</head>
+<style>
+    .no-decoration {
+        text-decoration: none;
+        color: inherit; /* Đảm bảo màu chữ giữ nguyên */
+    }
+
+     
+
+</style>
+<body>
+ 
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #dc1467">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                <img src="~/image/vulogo.png" style="max-height: 100px; margin-left:90px;margin-top:10px">
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <form class="d-flex custom-search" role="search" asp-action="Search" asp-controller="Phone">
+                        <input name="query" class="form-control me-2 custom-input" type="search" placeholder="Nhập tên điện thoại, máy tính, phụ kiện... cần tìm" style="width:480px;margin-left:15px" />
+                        <input type="submit" value="Tìm kiếm" style="margin-right:10px" class="btn btn-outline-dark" />
+                    </form>
+                   
+                    <!-- Thêm nút giỏ hàng -->
+      
+
+                    <ul class="navbar-nav ml-auto" style="margin-right:90px">
+                        <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("LoginAdmin", "DnAdmin")">
+                                <div style="display: flex; flex-direction: column; align-items: center;">
+                                <strong><i class="bi bi-database-add"></i></strong>
+                                    <span class="font-weight-bold">Admin</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#modal-cart">
+                                <div style="display: flex; flex-direction: column; align-items: center;">
+                                    <strong><i class="bi bi-stripe"></i></strong>
+                                    <span class="font-weight-bold">Thanh toán & tiện ích</span>
+                                </div>
+                            </a>
+                        </li>
+                    @{
+                        string fullName = Context.Session.GetString("HoTen");
+                        bool isLoggedIn = !string.IsNullOrEmpty(fullName);
+                    }
+                    @* Kiểm tra đang nhập hay chưa đn*@
+                    @if (isLoggedIn)
+                    {
+                        <li class="nav-item dropdown" style="margin-top:10px">
+                            <strong style="display: flex; flex-direction: column; align-items: center; color:white; margin-top: -6px;"><i class="bi bi-person-video"></i></strong>
+                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-top: -5px;">
+                                <strong style="margin-top: 2px;">@fullName</strong>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" asp-controller="DkDn" asp-action="Logout">Đăng Xuất</a></li>
+                            </ul>
+                        </li>
+
+                    }
+                    else
+                    {
+                        <li class="nav-item dropdown" style="margin-top:10px">
+                            <strong style="display: flex; flex-direction: column; align-items: center;color:white;margin-top: -6px;"><i class="bi bi-person-video"></i></strong>
+                            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-top: -5px;">
+                                <strong style="margin-top: 2px;">Tài Khoản</strong> <!-- Thêm margin-top cho chữ -->
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" asp-controller="DkDn" asp-action="Login">Đăng Nhập</a></li>
+                                <li><a class="dropdown-item" asp-controller="DkDn" asp-action="Dangky">Đăng Kí</a></li>
+                            </ul>
+                        </li>
+
+                    }
+                 @*    <li class="nav-item">
+                        <a class="nav-link" asp-controller="DkDn" asp-action="Logout" class="no-decoration">
+                            <div style="display: flex; flex-direction: column; align-items: center;">
+                                <strong><i class="bi bi-person-video"></i></strong>
+                                <span class="font-weight-bold">Logout</span>
+                            </div>
+                        </a>
+                    </li> *@
+
+                    @if (isLoggedIn)
+                    {
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="@Url.Action("Index", "GioHang")">
+                                    <div class="d-flex flex-column align-items-center">
+                                        <strong><i class="bi bi-cart4"></i></strong>
+                                        <span class="font-weight-bold">Giỏ hàng</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+
+                    }
+                    else
+                    {
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="DkDn" asp-action="Login">
+                                    <div class="d-flex flex-column align-items-center">
+                                        <strong><i class="bi bi-cart4"></i></strong>
+                                        <span class="font-weight-bold">Giỏ hàng</span>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    }
+
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: #000000; max-height:50px;font-size:15px">
+            <div class="container-fluid">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-auto container">
+                <li class="nav-item" style="margin-left:14px">
+                    <a href="@Url.Action("Index", "Phone")" class="nav-link">
+                        <i class="bi bi-phone"></i> ĐIỆN THOẠI
+                    </a>
+                    <ul class="dropdown-menu" style="font-size:13px">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <div class="row">
+                                    <h6>HÃNG SẢN XUẤT</h6>
+                                </div>
+                                <div class="row" style="margin-top:6px">
+                                    <div class="col-sm-4">
+                                        <span class="text-hover">Apple(iPhone)</span>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <span class="text-hover">Samsung</span>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <span class="text-hover">Oppo</span>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top:6px">
+                                    <div class="col-sm-4">
+                                        <span class="text-hover">Xiaomi</span>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <span class="text-hover">Realme</span>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <span class="text-hover">Honor</span>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top:6px">
+                                    <div class="col-sm-4">
+                                        <span class="text-hover">Vivo</span>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <span class="text-hover">Nokia</span>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <span class="text-hover">Asus</span>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top:20px">
+                                    <h6>ĐỒNG HỒ THÔNG MINH</h6>
+                                </div>
+                                <div class="row" style="margin-top:6px">
+                                    <div class="col-sm-4">
+                                        <span class="text-hover">Apple Watch</span>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <span class="text-hover">Samsung</span>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <span class="text-hover">Garmin</span>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top:6px">
+                                    <div class="col-sm-4">
+                                        <span class="text-hover">Xiaomi</span>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <span class="text-hover">Realme</span>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <span class="text-hover">Honor</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <h6>MỨC GIÁ</h6>
+                                <div class="text-hover" style="margin-top:10px">Dưới 2 triệu</div>
+                                <div class="text-hover" style="margin-top:6px">Từ 2 - 4 triệu</div>
+                                <div class="text-hover" style="margin-top:6px">Từ 4 - 7 triệu</div>
+                                <div class="text-hover" style="margin-top:6px">Từ 7 - 13 triệu</div>
+                                <div class="text-hover" style="margin-top:6px">Trên 13 triệu</div>
+                            </div>
+                        </div>
+                    </ul>
+                </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="bi bi-laptop"></i> LOPTOP</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="bi bi-tablet-landscape"></i> MÁY TÍNH BẢNG</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="bi bi-apple"></i></i> APPLE</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="bi bi-pc-display"></i> PC-LINH KIỆN</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="bi bi-earbuds"></i> PHỤ KIỆN</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="bi bi-arrow-repeat"></i> MÁY CỦ GIÁ RẼ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="bi bi-house-gear-fill"></i> ĐỆN MÁY GIA DỤNG</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="bi bi-credit-card-fill"></i> SIM & THẺ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="bi bi-receipt-cutoff"></i> KHUYẾN MÃI</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container" >
+            @RenderBody()
+
+        <footer class="row" style="background-color:white; color:black;border-radius: 5px; box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2); padding: 10px;margin-top:10px">
+           
+                <div class="col-sm-3">
+                    <h3>Thông tin liên hệ</h3>
+                    <p>Địa chỉ: 48 Thạnh Xuân, Phường Thạnh Xuân, Quận 12, TP.Hồ Chí Minh</p>
+                    <p>Hotline: <span class="footer-hotline">0123 456 789</span></p>
+                </div>
+                <div class="col-sm-3">
+                    <h3>Chăm sóc khách hàng</h3>
+                    <ul>
+                        <li>Hướng dẫn mua hàng</li>
+                        <li>Chính sách đổi trả</li>
+                        <li>Hỗ trợ khách hàng</li>
+                    </ul>
+                </div>
+                <div class="col-sm-3">
+                    <h3>Về chúng tôi</h3>
+                    <p>Chúng tôi là địa chỉ tin cậy cho sự tươi ngon và an toàn trong từng sản phẩm gà cung cấp. Với cam kết chất lượng, chúng tôi luôn mang đến những sản phẩm gà tươi ngon nhất từ nguồn cung cấp đáng tin cậy.</p>
+                </div>
+                <div class="col-sm-3">
+                    <h3>Theo dõi chúng tôi</h3>
+                    <p>Để cập nhật những thông tin mới nhất về sản phẩm và khuyến mãi, hãy theo dõi chúng tôi trên các mạng xã hội:</p>
+                </div>
+            </footer>
+        </div>
+
+</body>
+</html>
+
+
+

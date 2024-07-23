@@ -1,0 +1,181 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+@model List<SanPham>
+@{
+    var xapxepmoi = Model.OrderByDescending(p => p.NgaydangSp).Take(4);
+}
+@{
+    var xapxepbanchay = Model.OrderByDescending(p => p.Soluotban).Take(4);
+}
+<style>
+    .abc:hover {
+        border: 1px black
+    }
+     
+    .btn-buy:hover {
+        background-color: darkred; /* Màu nền đỏ tối khi hover */
+        color: white; /* Màu chữ trắng */
+        font-size: 18px; /* Kích thước chữ lớn hơn khi hover */
+    }
+</style>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Assignment</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/bootstrap.min.css">
+    <script src="~/js/bootstrap.bundle.js"></script>
+    <link rel="stylesheet" href="~/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="~/js/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-route/1.8.3/angular-route.min.js"></script>
+</head>
+<body ng-app="myApp">
+
+    <div>
+        <section class="row">
+            <div class="row">
+                <img src="~/image/abc.webp" class="img-fluid">
+            </div>
+            <div class="row">
+                <div class="col-sm-8">
+                    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="~/image/dong6.webp" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="~/image/dong1.webp" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="~/image/dong2.webp" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="~/image/dong3.webp" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="~/image/dong4.webp" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="~/image/dong7.webp" class="d-block w-100" alt="...">
+                            </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-sm-4 carousel">
+                    <div class="col " style="margin-bottom:5px">
+                        <img src="~/image/satdong1.webp" class="d-block w-100" alt="..." />
+                    </div>
+                    <div class="col">
+                        <img src="~/image/satdong2.webp" class="d-block w-100" alt="..." />
+                    </div>
+                    <div class="col" style="margin-bottom:15px">
+                        <div style="font-weight: bold; color: gray;">
+                            Tin khuyến mãi
+                        </div>
+
+                        <div style="margin-top:5px ;font-weight: bold">
+                            <div>
+                                <img src="~/image/khuyenmai1.webp">
+                                Lương về sale tới 100% trúng quà
+                            </div>
+                        </div>
+                        <div style="margin-top:5px ;font-weight: bold">
+                            <img src="~/image/khuyenmai2.webp">
+                            Giảm giá đến 300k qua Vnpay-QR
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+       <div>
+           <h2 style="text-align:center;color:blue">BÁN CHẠY NHẤT</h2>
+           <div class="row" style="width:85%;margin:0 auto">
+
+                @foreach (var sanPham in xapxepbanchay)
+                    {
+                       
+                        <div class="col-sm-3 abc" style="background-color: #fff;
+                        padding: 20px;
+                        border-radius: 8px;
+                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                        width:23%;margin:10px">
+                            <div class="product-container">
+                                <a href="@Url.Action("CtSanPham", "Phone",new { id = @sanPham.MaSp })" class="product-link">
+                                    <div class="product-image">
+                                        <img src="~/image/@sanPham.HinhSp" alt="Product Image">
+                                    </div>
+                                    <div class="product-info">
+                                        <h3 class="product-name">@sanPham.TenSp</h3>
+                                    <p class="product-price" style="color:red;margin-bottom:0px;font-weight: bold;">@sanPham.GiaSp</p>
+                                    <p > Số lượt bán: <span style="color:red">@sanPham.Soluotban</span></p>
+                                        <button class="btn btn-buy" style="width:100%;background-color:red;color:white">Mua ngay</button>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    }
+               
+           </div>
+       </div>
+        <div>
+            <h2 style="text-align:center;color:blue">SẢN PHẨM MỚI</h2>
+            <div class="row" style="width:85%;margin:0 auto">
+
+                @foreach (var sanPham in xapxepmoi)
+                {
+
+                    <div class="col-sm-3 abc" style="background-color: #fff;
+                        padding: 20px;
+                        border-radius: 8px;
+                        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                        width:23%;margin:10px">
+                        <div class="product-container">
+                            <a href="@Url.Action("CtSanPham", "Phone",new { id = @sanPham.MaSp })" class="product-link">
+                                <div class="product-image">
+                                    <img src="~/image/@sanPham.HinhSp" alt="Product Image">
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-name">@sanPham.TenSp</h3>
+                                    <p class="product-price" style="color:red;margin-bottom:0px;font-weight: bold;">@sanPham.GiaSp</p>
+                                    <p> Ngày bán: <span style="color:red">@sanPham.NgaydangSp</span></p>
+                                    <button class="btn btn-buy" style="width:100%;background-color:red;color:white">Mua ngay</button>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var productPrices = document.querySelectorAll('.product-price');
+        productPrices.forEach(function (element) {
+            var price = parseFloat(element.textContent);
+            var formattedPrice = price.toLocaleString('vi-VN');
+            element.textContent = formattedPrice + ' đ';
+        });
+    });
+</script>
+ 
+

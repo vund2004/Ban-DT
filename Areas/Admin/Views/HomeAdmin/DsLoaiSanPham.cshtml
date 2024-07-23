@@ -1,0 +1,50 @@
+﻿@model IEnumerable<NET104_ASM.Models.LoaiSanPham>
+
+@{
+    ViewData["Title"] = "DsLoaiSanPham";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>DsLoaiSanPham</h1>
+
+<p>
+    <a asp-action="ThemLoaiSanPham">Create New</a>
+</p>
+<p>@TempData["Message"]</p>
+
+<table class="table">
+    <thead>
+        <tr class="table-warning">
+            <th>
+                @Html.DisplayNameFor(model => model.TenLoaiSp)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int i = 0;
+            string @cls = "table-success";
+        }
+        @foreach (var item in Model)
+        {
+            i = i + 1;
+            cls = "table-success";
+            if (i % 2 == 0)
+            {
+                cls = "table-primary";
+            }
+            <tr class="@cls">
+            <td>
+                @Html.DisplayFor(modelItem => item.TenLoaiSp)
+            </td>
+            <td>
+                    <a asp-action="SuaLoaiSanPham" asp-route-id="@item.MaLoaiSp">Edit</a> |
+                    <a asp-action="ChiTietLoaiSanPham" asp-route-id="@item.MaLoaiSp">Details</a> |
+
+                    <a asp-action="XoaLoaiSanPham" asp-route-id="@item.MaLoaiSp">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

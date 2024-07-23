@@ -1,0 +1,130 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<CartItem>
+
+<div class="row" style="margin-top:15px">
+    <!-- Bảng Giỏ Hàng -->
+    <div class="col-sm-8">
+        <h3 class="text-center">Giỏ hàng của bạn</h3>
+        <hr class="mt-3">
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover text-center">
+                <thead class="bg-info bg-opacity-50">
+                    <tr>
+                        <th class="col-md-2">Ảnh sản phẩm</th>
+                        <th class="col-md-3">Tên sản phẩm</th>
+                        <th class="col-md-2">Giá tiền</th>
+                        <th class="col-md-2">Số lượng</th>
+                        <th class="col-md-2">Thành tiền</th>
+                        <th class="col-md-1"></th> <!-- Thêm class col-md-1 để làm cho cột cuối cùng nhỏ hơn -->
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        decimal tongTien = 0; // Khởi tạo biến tổng tiền
+                    }
+
+                    @foreach(var item in Model)
+                    {
+                        <tr >
+                            <td style="vertical-align: middle;"><img src="~/image/@item.HinhSp" height="100"></td>
+                            <td style="font-size: 18px; font-weight: bold; vertical-align: middle;">@item.TenSp</td>
+                            <td class="product-price" style="font-size: 18px; font-weight: bold; vertical-align: middle;">@item.DonGiaSp</td>
+                            <td  style="font-size: 18px; font-weight: bold; vertical-align: middle;">@item.SoLuongSp</td>
+                            <td class="product-price" style="font-size: 18px; font-weight: bold; vertical-align: middle;">@item.ThanhTienSp</td>
+                            <td style="vertical-align: middle;">
+                                <button class="btn btn-danger">
+                                    <a style="text-decoration: none; color:white;" asp-action="Remove" asp-controller="GioHang" asp-route-id="@item.MaSp">Xóa</a>
+                                </button>
+                            </td>
+                        </tr>
+                             
+                                    // Cộng giá tiền của từng sản phẩm vào tổng tiền
+                                    tongTien += item.ThanhTienSp; 
+                               
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+     @{
+        string email = Context.Session.GetString("Email");
+        string ten = Context.Session.GetString("HoTen");
+        string sdt = Context.Session.GetString("Sdt");
+        string diachi = Context.Session.GetString("DiaChi");
+
+      }
+    <div class="col-md-4" style="">
+        <div class="container">
+            <h3 class="text-center">Thanh Toán & Giao Hàng</h3>
+            <hr>
+            <p><strong>Thông tin giao hàng</strong></p>
+
+            <form name="myForm">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="mb-3">
+                            <input type="text" value="@ten"  required class="form-control" placeholder="Họ và tên người nhận">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <input type="text" value="@sdt"  required ng-pattern="/^\d{10}$/" class="form-control" placeholder="Số điện thoại">
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <input type="email"value="@email" required class="form-control" placeholder="Email">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="mb-3">
+                            <input type="text" value="@diachi" required class="form-control" placeholder="Địa chỉ nhận hàng">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="mb-3">
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="Ghi chú"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <ul class="list-unstyled d-flex justify-content-between mb-0">
+                <li>
+                    <h4><strong>Tổng tiền:</strong></h4>
+                </li>
+                <li>
+                    <p class="product-price"><strong>@tongTien</strong></p>
+                </li>
+            </ul>
+            <button type="button" class="btn btn-dark w-100 mt-3">Mua Hàng</button>
+        </div>
+    </div>
+</div>
+<script>
+    // JavaScript để thêm đơn vị "đ" và định dạng số thành 1.000.000
+    document.addEventListener('DOMContentLoaded', function () {
+        var productPrices = document.querySelectorAll('.product-price');
+        productPrices.forEach(function (element) {
+            var price = parseFloat(element.textContent);
+            var formattedPrice = price.toLocaleString('vi-VN');
+            element.textContent = formattedPrice + ' đ';
+        });
+    });
+</script>

@@ -1,0 +1,90 @@
+﻿@model NET104_ASM.Models.NguoiDung
+
+@{
+    Layout = null;
+}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Đăng Kí Người Dùng</title>
+
+    <link rel="stylesheet" href="../../LayoutAdmin/assets/vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../../LayoutAdmin/assets/vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="../../LayoutAdmin/assets/css/style.css">
+</head>
+<style>
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .registration-form {
+        max-width: 400px;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-control {
+        border-radius: 0;
+    }
+
+    .btn-primary {
+        width: 100%;
+        font-size: 18px; /* Kích thước chữ của nút đăng ký */
+        transition: all 0.3s ease; /* Hiệu ứng chuyển đổi */
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .control-label {
+        display: inline-block;
+        width: 100px; /* Độ rộng của nhãn */
+        text-align: right;
+        margin-right: 10px; /* Khoảng cách giữa nhãn và trường nhập liệu */
+    }
+</style>
+
+<div class="container">
+    <div class="col-md-6 registration-form">
+        <h2 class="text-center">Đăng ký người dùng</h2>
+        <form asp-action="Dangky">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="HoTen" class="form-control" placeholder="Họ tên" />
+                <span asp-validation-for="HoTen" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input asp-for="Email" class="form-control" placeholder="Email"  />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Sdt" class="form-control" placeholder="Số điện thoại" />
+                <span asp-validation-for="Sdt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="DiaChi" class="form-control" placeholder="Địa chỉ" />
+                <span asp-validation-for="DiaChi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="MatKhau" class="form-control" placeholder="Mật khẩu" />
+                <span asp-validation-for="MatKhau" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Đăng ký" class="btn btn-primary" />
+            </div>
+            <p class="text-center mt-2">
+                Bạn đã có tài khoản? Đăng nhập <a href="@Url.Action("Login", "DkDn")">tại đây</a>
+            </p>
+        </form>
+    </div>
+</div>

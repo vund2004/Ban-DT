@@ -1,0 +1,102 @@
+﻿@model IEnumerable<NET104_ASM.Models.SanPham>
+
+@{
+    ViewData["Title"] = "DsSanPham";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>SanPham</h1>
+
+<p>
+    <a asp-action="ThemSanPham">Create New</a>
+</p>
+<p>@TempData["Message"]</p>
+<table class="table">
+    <thead>
+        <tr class="table-warning">
+            <th>
+                @Html.DisplayNameFor(model => model.TenSp)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiaSp)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HinhSp)
+            </th>
+            @*      <th>
+            @Html.DisplayNameFor(model => model.Chip)
+            </th>
+            <th>
+            @Html.DisplayNameFor(model => model.ManHinh)
+            </th>
+            <th>
+            @Html.DisplayNameFor(model => model.Ram)
+            </th>
+            <th>
+            @Html.DisplayNameFor(model => model.Hdd)
+            </th> *@
+            <th>
+                @Html.DisplayNameFor(model => model.Soluotban)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NgaydangSp)
+            </th>
+            @* <th>
+            @Html.DisplayNameFor(model => model.MaLoaiSpNavigation)
+            </th> *@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int i = 0;
+            string @cls = "table-success";
+        }
+        @foreach (var item in Model)
+        {
+            i = i + 1;
+            cls = "table-success";
+            if (i % 2 == 0)
+            {
+                cls = "table-primary";
+            }
+            <tr class="@cls">
+                <td>
+                    @Html.DisplayFor(modelItem => item.TenSp)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GiaSp)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HinhSp)
+                </td>
+                @*  <td>
+            @Html.DisplayFor(modelItem => item.Chip)
+            </td>
+            <td>
+            @Html.DisplayFor(modelItem => item.ManHinh)
+            </td>
+            <td>
+            @Html.DisplayFor(modelItem => item.Ram)
+            </td>
+            <td>
+            @Html.DisplayFor(modelItem => item.Hdd)
+            </td> *@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Soluotban)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NgaydangSp)
+                </td>
+                @*     <td>
+            @Html.DisplayFor(modelItem => item.MaLoaiSpNavigation.MaLoaiSp)
+            </td> *@
+                <td>
+                    <a asp-action="SuaSanPham" asp-route-id="@item.MaSp">Edit</a> |
+                    <a asp-action="ChiTietSanPham" asp-route-id="@item.MaSp">Details</a> |
+                    <a asp-action="XoaSanPham" asp-route-id="@item.MaSp">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

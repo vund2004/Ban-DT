@@ -1,0 +1,126 @@
+﻿@model NET104_ASM.Models.SanPham
+@{
+    ViewData["Title"] = "CTsanPham";
+}
+
+<style>
+    .small-table {
+        font-size: 14px;
+        border-collapse: collapse;
+    }
+
+        .small-table td {
+            padding: 5px 10px;
+        }
+
+        .small-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+    .btn-buy {
+        width: 100%;
+        text-align: center;
+        background-color: red;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+        .btn-buy:hover {
+            background-color: darkred;
+            color: white;
+            font-size: 18px;
+        }
+
+    .formatted-number {
+        color: red;
+        font-weight: bold; /* Added font-weight for emphasis */
+    }
+
+    .currency {
+        color: red;
+    }
+</style>
+
+<div class="container" style="margin-bottom: 20px;">
+    <div>
+        <a href="@Url.Action("Index", "Home")" style="font-size: 16px; color: blue; text-decoration: none;">Trang chủ</a>
+        /
+        <span><a href="@Url.Action("Index", "Phone")" style="font-size: 16px; color: blue; text-decoration: none;">Điện thoại</a></span>
+        /<span style="font-size: 16px; color: gray;"> Chi Tiết Sản Phẩm</span>
+    </div>
+    <div>
+        <h3 style="margin-top: 20px;">@Model?.TenSp</h3>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <img src="~/image/@Model?.HinhSp" style="width: 400px; margin-left: 70px;" alt="Alternate Text" />
+        </div>
+        <div class="col-sm-6">
+            <div class="tableddi" style="background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+                <h3 class="formatted-number">@Model?.GiaSp<span class="currency"> đ</span></h3>
+                <h5>Thông số kĩ thuật</h5>
+                <form asp-action="AddToCart" asp-controller="GioHang" asp-route-id="@Model?.MaSp">
+                    <div class="table table-bordered row" style="margin-left: 4px;">
+                    <table class="small-table">
+                        <tr>
+                            <td>Màn hình</td>
+                            <td>@Model?.ManHinh</td>
+                        </tr>
+                        <tr>
+                            <td>Ram</td>
+                            <td>@Model?.Ram</td>
+                        </tr>
+                        <tr>
+                            <td>Bộ nhớ trong</td>
+                            <td>@Model?.Hdd</td>
+                        </tr>
+                        <tr>
+                            <td>CPU</td>
+                            <td>@Model?.Chip</td>
+                        </tr>
+                        <tr>
+                            <td>Số lượt bán</td>
+                            <td>@Model?.Soluotban</td>
+                        </tr>
+                        <tr>
+                            <td>Xuất xứ</td>
+                            <td>Trung Quốc</td>
+                        </tr>
+                        <tr>
+                            <td>Thời gian ra mắt</td>
+                            <td>@Model?.NgaydangSp</td>
+                        </tr>
+                            <tr style="font-size:20px">
+                                <td>Số lượng</td>
+                                <td>
+                                    <input id="quantity" type="number" name="soluong" class="form-control" value="1" min="1" max="3">
+                                </td>
+                            </tr>
+                    </table>
+                </div>  
+              
+                    <button type="submit" class="btn btn-buy">Thêm vào giỏ hàng</button>
+        
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // JavaScript để thêm đơn vị "đ" và định dạng số thành 1.000.000
+    document.addEventListener('DOMContentLoaded', function () {
+        var formattedNumbers = document.querySelectorAll('.formatted-number');
+        formattedNumbers.forEach(function (element) {
+            var number = parseFloat(element.textContent);
+            var formattedNumber = number.toLocaleString('vi-VN');
+            element.textContent = formattedNumber + ' đ';
+        });
+    });
+</script>

@@ -1,0 +1,334 @@
+﻿@model IEnumerable<NET104_ASM.Models.SanPham>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<link rel="stylesheet" href="~/css/stylePhone.css">
+<div class="container">
+    <div>
+        <a href="@Url.Action("Index", "Home")" style="font-size: 16px; color: blue; text-decoration: none;">Trang chủ</a>
+        /
+        <span style="font-size: 16px; color: gray;">Điện thoại</span>
+
+    </div>
+    <div class="row">
+        <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="~/image/PhoneDong1.webp" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/image/PhoneDong2.webp" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/image/PhoneDong3.webp" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/image/PhoneDong5.webp" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item">
+                    <img src="~/image/PhoneDong6.webp" class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <div style="font-size:17px; margin-bottom:13px;margin-top:20px "><strong>Mức giá</strong></div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <input type="checkbox" checked style="transform: scale(1.3);">
+                    <label class="checkbox-label" >Tất cả</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <input type="checkbox"  style="transform: scale(1.3);">
+                    <label class="checkbox-label" >dưới 2 triệu</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <input type="checkbox"  style="transform: scale(1.3);">
+                    <label class="checkbox-label" >từ 2 - 4 triệu</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <input type="checkbox"  style="transform: scale(1.3);">
+                    <label class="checkbox-label" >từ 4 - 7 triệu</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <input type="checkbox"  style="transform: scale(1.3);">
+                    <label class="checkbox-label" >từ 7 - 13 triệu</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <input type="checkbox"  style="transform: scale(1.3);">
+                    <label class="checkbox-label" >trên 13 triệu</label>
+                </div>
+            </div>
+            <div style="font-size:17px; margin-bottom:13px;margin-top:20px "><strong>Loại điện thoại</strong></div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <input type="checkbox" checked style="transform: scale(1.3);">
+                    <label class="checkbox-label" >Tất cả</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <input type="checkbox"  style="transform: scale(1.3);">
+                    <label class="checkbox-label" >android</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <input type="checkbox"  style="transform: scale(1.3);">
+                    <label class="checkbox-label" >ios (iPhone)</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <input type="checkbox"  style="transform: scale(1.3);">
+                    <label class="checkbox-label" >bàn phím 4g</label>
+                </div>
+            </div>
+            <div style="font-size:17px; margin-bottom:13px;margin-top:20px "><strong>Tính năng đặc biệt</strong></div>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <input type="checkbox" checked style="transform: scale(1.3);">
+                    <label class="checkbox-label" >Tất cả</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <input type="checkbox"  style="transform: scale(1.3);">
+                    <label class="checkbox-label" >a.i phone</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <input type="checkbox"  style="transform: scale(1.3);">
+                    <label class="checkbox-label" >bảo mật vân tay</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-8">
+                    <input type="checkbox"  style="transform: scale(1.3);">
+                    <label class="checkbox-label" >nhận diện khuôn mặt</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-9">
+                    <input type="checkbox"  style="transform: scale(1.3);">
+                    <label class="checkbox-label" >chống nước & bụi</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <input type="checkbox"  style="transform: scale(1.3);">
+                    <label class="checkbox-label" >sạc nhanh</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <input type="checkbox"  style="transform: scale(1.3);">
+                    <label class="checkbox-label" >hổ trợ 5g</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <input type="checkbox"  style="transform: scale(1.3);">
+                    <label class="checkbox-label" >sạc không dây</label>
+                </div>
+            </div>
+            <div style="font-size:17px; margin-bottom:13px;margin-top:20px "><strong>Hiệu năng và Pin</strong></div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <input type="checkbox" checked style="transform: scale(1.3);">
+                    <label class="checkbox-label" >Tất cả</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-9">
+                    <input type="checkbox"  style="transform: scale(1.3);">
+                    <label class="checkbox-label" >dưới 3000 mah</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-9">
+                    <input type="checkbox"  style="transform: scale(1.3);">
+                    <label class="checkbox-label" >pin từ 3000 - 4000 mah</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-9">
+                    <input type="checkbox"  style="transform: scale(1.3);">
+                    <label class="checkbox-label" >pin từ 4000 - 5000 mah</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-9">
+                    <input type="checkbox"  style="transform: scale(1.3);">
+                    <label class="checkbox-label" >siêu trâu: trên 5000 mah</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-9">
+                    <input type="checkbox"  style="transform: scale(1.3);">
+                    <label class="checkbox-label" >chơi game / cấu hình cao</label>
+                </div>
+            </div>
+            <div style="font-size:17px; margin-bottom:13px;margin-top:20px "><strong>Màn hình</strong></div>
+            <div class="row">
+                <div class="col-sm-9">
+                    <input type="checkbox" checked style="transform: scale(1.3);">
+                    <label class="checkbox-label" >Tất cả</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-9">
+                    <input type="checkbox"  style="transform: scale(1.3);">
+                    <label class="checkbox-label" >màn hình nhỏ: dưới 5.0 inch</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <input type="checkbox"  style="transform: scale(1.3);">
+                    <label class="checkbox-label" >trên 6.0 inch</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <input type="checkbox"  style="transform: scale(1.3);">
+                    <label class="checkbox-label" >màn hình gập</label>
+                </div>
+            </div>
+            <div style="font-size:17px; margin-bottom:13px;margin-top:20px "><strong>Camera</strong></div>
+            <div class="row">
+                <div class="col-sm-9">
+                    <input type="checkbox" checked style="transform: scale(1.3);">
+                    <label class="checkbox-label" >Tất cả</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-9">
+                    <input type="checkbox"  style="transform: scale(1.3);">
+                    <label class="checkbox-label" >quay phim slow motion</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-9">
+                    <input type="checkbox"  style="transform: scale(1.3);">
+                    <label class="checkbox-label" >ai camera</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-9">
+                    <input type="checkbox"  style="transform: scale(1.3);">
+                    <label class="checkbox-label" >hiệu ứng làm đẹp</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-9">
+                    <input type="checkbox"  style="transform: scale(1.3);">
+                    <label class="checkbox-label" >zoom quang học</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-9">
+                    <input type="checkbox"  style="transform: scale(1.3);">
+                    <label class="checkbox-label" >chống rung ois  </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-9">
+                    <input type="checkbox"  style="transform: scale(1.3);">
+                    <label class="checkbox-label" >chụp macro</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-9">
+                    <input type="checkbox"  style="transform: scale(1.3);">
+                    <label class="checkbox-label" >chụp góc rộng</label>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9" style="margin-top: 20px;">
+            <div class="row" style="display: grid; grid-template-columns: repeat(6, 1fr); margin:auto; margin-bottom:5px">
+                @foreach (var LoaiSanPham in ViewBag.DanhMuc)
+                {
+                    <div style="margin-left:20px">
+                        <div class="image-container">
+                            <a asp-controller="Phone" asp-action="Index" asp-route-danhmuc="@LoaiSanPham.MaLoaiSp" style="text-decoration: none;">
+                                <img src="~/image/@LoaiSanPham.TenLoaiSp" alt="Alternate Text" class="img-fluid" style="height:50px"/>
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            <div class="row">
+                @foreach (var sanPham in Model)
+                {
+
+                    <div class="col-sm-4">
+                        <div class="product-container">
+                            <a asp-controller="Phone" asp-action="CTsanPham" asp-route-id="@sanPham.MaSp" style=" text-decoration: none;">
+                                <div class="product-image">
+                                    <img src="~/image/@sanPham.HinhSp" alt="Product Image">
+                                </div>
+                                <div class="product-info">
+                                    <h3 class="product-name">@sanPham.TenSp</h3>
+                                    <p class="product-price">@sanPham.GiaSp</p>
+                                    <div class="cdt-product__config__param">
+                                        <span><i class="bi bi-phone"></i>@sanPham.ManHinh</span>
+                                        <span><i class="bi bi-ticket-perforated"></i>@sanPham.Ram</span>
+                                        <span><i class="bi bi-ticket-detailed-fill"></i>@sanPham.Hdd</span><br>
+                                        <span><i class="bi bi-cpu"></i>@sanPham.Chip</span>
+                                    </div>
+                                    <button class="btn btn-buy" style="width:100%;height:45px ;">
+                                        Thêm vào giỏ hàng
+                                    </button>
+                                </div>
+                            </a>
+                            
+
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    // JavaScript để thêm đơn vị "đ" và định dạng số thành 1.000.000
+    document.addEventListener('DOMContentLoaded', function () {
+        var productPrices = document.querySelectorAll('.product-price');
+        productPrices.forEach(function (element) {
+            var price = parseFloat(element.textContent);
+            var formattedPrice = price.toLocaleString('vi-VN');
+            element.textContent = formattedPrice + ' đ';
+        });
+    });
+</script>

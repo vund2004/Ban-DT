@@ -1,0 +1,153 @@
+.navbar {
+    padding: 5px 0;
+    max-height: 70px;
+    background-color: #8B0000;
+}
+
+.navbar-brand {
+    color: #ffffff !important; /* Màu chữ trắng cho logo */
+
+}
+
+.navbar-brand img {
+    max-height: 60px; /* Điều chỉnh kích thước logo theo ý muốn */
+ 
+    
+}
+.navbar-nav .nav-link {
+    color: #ffffff !important; /* Màu chữ trắng cho các mục menu */
+}
+
+/* CSS cho ô tìm kiếm */
+.custom-search .form-control {
+    background-color: #ffffff; /* Màu nền trắng cho ô tìm kiếm */
+    color: #000000; /* Màu chữ đen cho ô tìm kiếm */
+}
+
+/* CSS cho biểu tượng tìm kiếm */
+.custom-search button {
+    background-color: #000000; /* Màu nền trắng cho nút tìm kiếm */
+    color: #ffffff; /* Màu chữ đen cho nút tìm kiếm */
+    border: none; /* Loại bỏ viền */
+}
+
+/* CSS cho dropdown */
+.dropdown-menu {
+    background-color: #ff0000; /* Màu nền đỏ cho dropdown */
+}
+.dropdown-item i {
+    color: #000000; /* Màu chữ đen cho các biểu tượng trong dropdown */
+}
+.custom-search .input-group {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.custom-search .input-group input {
+     margin-right: -1px; /* Xóa bỏ margin phải để ô nhập liệu và nút tìm kiếm gần nhau hơn */
+}
+
+.custom-search .input-group button {
+     margin-left: -1px; /* Xóa bỏ margin trái để nút tìm kiếm và ô nhập liệu gần nhau hơn */
+}
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: white;
+    padding: 10px;
+    z-index: 1000; /* Đảm bảo dropdown-menu hiển thị phía trên nền */
+}
+
+.nav-item:hover .dropdown-menu {
+    display: block;
+}
+
+/* Để tùy chỉnh vị trí của dropdown-menu */
+.nav-item {
+    position: relative;
+}
+
+/* Tùy chỉnh kiểu danh sách */
+.dropdown-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.dropdown-menu li {
+    padding: 5px 0;
+}
+
+/* Tùy chỉnh liên kết trong danh sách */
+.dropdown-menu a {
+    text-decoration: none;
+    color: black;
+}
+
+.dropdown-menu a:hover {
+     color: blue;
+}
+.nav-item:hover .dropdown-menu {
+
+    display: block;
+    width: 600px; /* Điều chỉnh kích thước thanh menu dropdown khi rê chuột vào */
+}
+
+/* Tạo khung miền màu trắng đen cho carousel */
+.carousel {
+
+    margin-top:10px;
+    border-radius: 5px; /* Bo góc */
+    overflow: hidden; /* Ẩn phần ngoài của carousel */
+}
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: invert(100%); /* Đảo ngược màu của icon chuyển đổi */
+}
+
+    /* Đổi màu chữ và icon của nút chuyển đổi */
+.carousel-control-prev-icon::before,
+.carousel-control-next-icon::before {
+        color: #fff; /* Màu trắng */
+}
+.text-hover:hover {
+    color: blue;
+    cursor: pointer; /* Đổi con trỏ chuột khi di chuột qua */
+}
+/* Thiết lập màu nền trắng cho toàn bộ trang */
+body {
+    background-color: #ffffff;
+}
+
+/* Kiểu dáng cho phần footer */
+footer {
+    background-color: #343a40; /* Màu nền footer */
+    color: #ffffff; /* Màu chữ footer */
+    padding: 60px 0; /* Khoảng cách giữa nội dung và viền footer */
+}
+
+    /* Kiểu dáng cho các tiêu đề trong footer */
+    footer h5 {
+        color: #ffffff; /* Màu chữ cho tiêu đề */
+        margin-bottom: 20px; /* Khoảng cách giữa các tiêu đề */
+    }
+
+    /* Kiểu dáng cho các liên kết trong footer */
+    footer a {
+        color: #ffffff; /* Màu chữ cho các liên kết */
+        text-decoration: none; /* Loại bỏ gạch chân */
+    }
+
+        /* Kiểu dáng khi rê chuột vào các liên kết trong footer */
+    footer a:hover {
+            color: #cccccc; /* Màu chữ khi rê chuột vào */
+
+        }
+.product-link {
+    text-decoration: none; /* Loại bỏ gạch chân */
+    color: inherit; /* Bảo đảm màu văn bản giữ nguyên */
+}
+    .product-link:hover {
+        text-decoration: none; /* Loại bỏ gạch chân khi hover */
+        color: inherit; /* Bảo đảm màu văn bản giữ nguyên khi hover */
+    }
